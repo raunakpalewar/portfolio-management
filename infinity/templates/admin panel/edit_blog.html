@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+{% extends './admin_base.html' %}
+{% load static %}
+
+{% block title %}Edit - Blog {% endblock %}
+{% block sidebar %}
+
+<div class="toggle">
+    <button id="sidebarCollapse"><i class="fa fa-bars"></i></button>
+</div>
+<div class="dashboard col-md-2 d3 table-outer d-md-block sidebar" style="padding-left: 0; padding-right: 0;">
+
+    <table class="table active" id="sidebar">
+        <tbody class="barrow">
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-gauge-high" style="color: #425743;"></i></td>
+                <td><a href="{% url 'admin_dashboard' %}" style="color: #425743;text-decoration: none;">Dashboard</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-screwdriver-wrench" style="color: #425743;"></i></td>
+                <td><a href="{% url 'service_manage'  %}" style="color:#425743;text-decoration: none;">Service Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-users" style="color: #425743;"></i></td>
+                <td><a href="{% url 'category_manage' %}" style="color: #425743;text-decoration: none;">Category Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-passport" style="color: #425743;"></i></td>
+                <td><a href="{% url 'portfolio_manage' %}" style="color: #425743;text-decoration: none;">Portfolio Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-chart-bar" style="color: #425743;"></i></td>
+                <td><a href="{% url 'blog_manage' %}" style="color:#425743;text-decoration: none;">Blog Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-brands fa-bandcamp" style="color: #425743;"></i></td>
+                <td><a href="{% url 'brand_manage' %}" style="color: #425743;text-decoration: none;">Brand Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-regular fa-question" style="color: #425743;"></i></td>
+                <td><a href="{% url 'faq_manage' %}" style="color: #425743;text-decoration: none;">FAQ Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-lock" style="color: #425743;"></i></i></td>
+                <td><a href="{% url 'change_password' %}" style="color: #425743;text-decoration: none;">Change Password</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-cogs" style="color: #425743;"></i></td>
+                <td>
+                    <a href="#" id="moreLink" style="color: #425743;text-decoration: none;">Static Content <i class="fas fa-caret-down"></i></a>
+                    <div id="dropdownContent" class="dropdown-content">
+                        <a href="{% url 'termscondition' %}" style="color:#425743;text-decoration: none;">Terms and Condition Management</a>
+                        <a href="{% url 'privacypolicy' %}" style="color:#425743;text-decoration: none;">Privacy and Policy Management</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+{% block heading %}<h2>Edit Details</h2>{% endblock %}
+{% block main_content %}
+  <span id="sr_no" style="display: none;">{{id}}</span>
+  <div class="container d6" style="width: 80%;">
+    <form id="editBlogForm"  enctype="multipart/form-data"   >
+      <!-- Blog details will be populated here -->
+  </form>
+  <br />
+  {% comment %} <a href="javascript:history.back()" class="btn bg-white border-dark">Go Back</a> {% endcomment %}
+  <!-- <button id="submitButton" class="btn btn-primary"> -->
+    <div id="categoryError"></div>
+      
+</div>
+<div id="successPopup" class="popup">
+    <div class="popup-content">
+        <i class="fas fa-check-circle"></i>
+        <p>Blog successfully updated!</p>
+    </div>
+</div>
+{% endblock %}
+{% block script %}<script src="{% static 'js/admin_panel/blog_manage.js' %}"></script>{% endblock %}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="shortcut icon" href="static/images/infinity_logo_icon.png" style="width: 5px;">
+    <link rel="stylesheet" href="./static/css/admin_panel/otp.css">
+    
+</head>
+<body>
+    <div class="login-container" >
+        <h2 style="font-family: 'Arial', sans-serif; font-weight: 400; font-style: normal; font-size: 22px; margin-top: 1px; margin-bottom: 30px;">OTP VERIFICATION</h2>
+        <div style="text-align: center;">
+            <p style="color: #333333; display:flex; text-align: right; margin-top: 30px; margin-bottom: 30px; font-size: 15px;text-align: center;">Please enter OTP. We have sent an OTP to your email address.</p>
+        </div> 
+        <form id="otpForm" enctype="multipart/form-data" name="newForm" novalidate onsubmit="return checkOtp(event)">
+           {% csrf_token %}
+            <div class="otp-input-container">
+                <input type="text" id="otpInput1" class="otp-input" maxlength="1" required oninput="handleInput(this, 'otpInput2', 'otpInput1')" onkeydown="handleBackspace(this, 'otpInput1')">
+                <input type="text" id="otpInput2" class="otp-input" maxlength="1" required oninput="handleInput(this, 'otpInput3', 'otpInput1')" onkeydown="handleBackspace(this, 'otpInput1')">
+                <input type="text" id="otpInput3" class="otp-input" maxlength="1" required oninput="handleInput(this, 'otpInput4', 'otpInput2')" onkeydown="handleBackspace(this, 'otpInput2')">
+                <input type="text" id="otpInput4" class="otp-input" maxlength="1" required oninput="handleInput(this, 'otpInput5', 'otpInput3')" onkeydown="handleBackspace(this, 'otpInput3')">
+                <input type="text" id="otpInput5" class="otp-input" maxlength="1" required oninput="handleInput(this, 'otpInput6', 'otpInput4')" onkeydown="handleBackspace(this, 'otpInput4')">
+                <input type="text" id="otpInput6" class="otp-input" maxlength="1" required oninput="handleInput(this, 'otpInput7', 'otpInput5')" onkeydown="handleBackspace(this, 'otpInput5')">
+               
+            </div>
+
+            <div id="countdown" style="text-align: end;">
+                <span id="countdownText"><span id="minutes">02</span>:<span id="seconds">00</span></span>
+                <span id="resendOTP" style="display: none;"><a href="#" onclick="resendOTPFunction()">Resend OTP</a></span>
+            </div>
+
+            <span id="otpError" class="error-message"></span>
+            <button type="submit" class="otp-button" value="CONFIRM OTP">Verify</button>
+            <div class="backtologin">
+                <a href="#" style="color: #425743; font-size: 13px;">Resent OTP</a>
+            </div>
+        </form>
+        <div class="overlay" id="overlay">
+            <div class="dialog-box" id="dialogBox">
+                <i class="fas fa-check-circle"></i>
+                <p>OTP Re-Sent Successfully</p>
+            </div>
+        </div>
+    </div>
+
+<script>
+
+    function handleBackspace(currentInput, previousInputId) {
+        const key = event.keyCode || event.charCode;
+
+        if (key === 8 && currentInput.value.length === 0) { // Backspace key
+            const previousInput = document.getElementById(previousInputId);
+            if (previousInput) {
+                previousInput.focus();
+            }
+            event.preventDefault();
+        }
+    }
+</script>
+
+<script src="{% static 'js/admin_panel/forget.js' %}"></script>
+</body>
+</html>

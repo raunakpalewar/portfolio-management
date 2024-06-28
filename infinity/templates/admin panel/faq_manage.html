@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+{% extends './admin_base.html' %}
+{% load static %}
+
+
+{% block title %} FAQ's Management {% endblock %}
+{% block sidebar %}
+
+<div class="toggle">
+    <button id="sidebarCollapse"><i class="fa fa-bars"></i></button>
+</div>
+<div class="dashboard col-md-2 d3 table-outer d-md-block sidebar" style="padding-left: 0; padding-right: 0;">
+
+    <table class="table active" id="sidebar">
+        <tbody class="barrow">
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-gauge-high" style="color: #425743;"></i></td>
+                <td><a href="{% url 'admin_dashboard' %}" style="color: #425743;text-decoration: none;">Dashboard</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-screwdriver-wrench" style="color: #425743;"></i></td>
+                <td><a href="{% url 'service_manage'  %}" style="color:#425743;text-decoration: none;">Service Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-users" style="color: #425743;"></i></td>
+                <td><a href="{% url 'category_manage' %}" style="color: #425743;text-decoration: none;">Category Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-passport" style="color: #425743;"></i></td>
+                <td><a href="{% url 'portfolio_manage' %}" style="color: #425743;text-decoration: none;">Portfolio Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-chart-bar" style="color: #425743;"></i></td>
+                <td><a href="{% url 'blog_manage' %}" style="color:#425743;text-decoration: none;">Blog Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-brands fa-bandcamp" style="color: #425743;"></i></td>
+                <td><a href="{% url 'brand_manage' %}" style="color: #425743;text-decoration: none;">Brand Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-regular fa-question" style="color: #425743;"></i></td>
+                <td><a href="{% url 'faq_manage' %}" style="color: #425743;text-decoration: none;">FAQ Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-lock" style="color: #425743;"></i></i></td>
+                <td><a href="{% url 'change_password' %}" style="color: #425743;text-decoration: none;">Change Password</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-cogs" style="color: #425743;"></i></td>
+                <td>
+                    <a href="#" id="moreLink" style="color: #425743;text-decoration: none;">Static Content <i class="fas fa-caret-down"></i></a>
+                    <div id="dropdownContent" class="dropdown-content">
+                        <a href="{% url 'termscondition' %}" style="color:#425743;text-decoration: none;">Terms and Condition Management</a>
+                        <a href="{% url 'privacypolicy' %}" style="color:#425743;text-decoration: none;">Privacy and Policy Management</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+                            
+{% block heading %}
+<h2>FAQ management</h2>
+<button type="button" class="btn" id="formbtn"> <a href="{% url 'addFAQ' %}">+ Add FAQ</a></button>
+{% endblock %}
+{% block main_content %}
+<div class="searchrow  row ">
+    <div class="col-md-4" style="text-align: left;">
+        <input type="text" placeholder="Search FAQ" name="search" class="i3" id="faqKeywordInput" style="width: 89%;">
+    </div>
+    <div class="col-md-3">
+        <input type="date" placeholder="From" name="search" class="i3" style="margin-right: 2px;" id="faqFromDateInput">
+    </div>
+    <div class="col-md-3">
+        <input type="date" placeholder="To"  name="search" class="i3" id="faqToDateInput">
+    </div>
+    <div class="col-md-1">
+        <select name="rows" id="numberofrows" class="i3">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="all">All</option>
+        </select>
+     </div>
+    <span id="statusMessage" ></span>
+</div>
+
+<div class="infotable">
+    <table>
+        <tr class="rowinfo"  style="text-align: center;">
+            <th> Sr.No</th>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Created Date & Time</th>
+            <th>Action</th>
+        </tr>
+        <tbody class="latestPortfolioTableBody" id="faqtable">
+      
+        </tbody>
+        <!-- <tr class="datarow"  style="text-align: center;">              
+            <td>1</td>
+            <td>ABC</td>
+            <td>XYZ</td>
+            <td> Aug17,2023 10:23 PM </td>
+            <td> <i class="fa-solid fa-eye m-1"></i> <i class="fa-regular fa-pen-to-square m-1"></i> <i class="fa-solid fa-trash"></i></td>
+        </tr> -->
+    </table>
+</div>
+
+<div class="pagination-container">
+    <div class="pagination-prev">
+        <a href="#" id="prevBtn"><i class="fas fa-caret-left" style="color: #425743;"></i></a>
+    </div>
+    <div id="pageNumbers" class="pageNumbers"></div>
+
+    <div class="pagination-next">
+        <a href="#" id="nextBtn"><i class="fas fa-caret-right" style="color: #425743;"></i></a>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}<script src="{% static 'js/admin_panel/faq_manage.js' %}"></script>{% endblock %}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/admin_panel/admin_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/admin_panel/view_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/admin_panel/sidebar.css' %}" />
+  
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title>Service View</title>
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-expand-sm custom-navbar d2" style="box-shadow: 0 10px 6px rgba(12, 12, 12, 0.1);">
+
+        <div class="container-fluid">
+
+            <img src="./infinity_logo.png" alt="" class="logo">
+
+            <!-- Spacer to push user info and dropdown to the right -->
+            <div class="flex-grow-1"></div>
+
+            <!-- User info and dropdown -->
+            <div class="d-flex">
+                <span class="nav-link text-light">Admin</span> <!-- Replace with the user's name -->
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user" style="color: #f1c40f;"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end d1" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#"><i class="fas fa-user-edit" style="background:#fff"></i> Edit Profile</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-key" style="background: #fff;"></i> Change Password</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt" style="background: #fff;"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="toggle">
+                <button id="sidebarCollapse"><i class="fa fa-bars"></i></button>
+            </div>
+            <div class="dashboard col-md-2 d3 table-outer d-md-block sidebar" style="padding-left: 0; padding-right: 0;">
+            
+                <table class="table active" id="sidebar">
+                    <tbody class="barrow">
+                        <tr class="datarow" style="text-align: center;">
+                            <td><i class="fa-solid fa-gauge-high" style="color: #425743;"></i></td>
+                            <td><a href="{% url 'admin_dashboard' %}" style="color: #425743;text-decoration: none;">Dashboard</a></td>
+                        </tr>
+                        <tr class="datarow" style="text-align: center;">
+                            <td><i class="fa-solid fa-screwdriver-wrench" style="color: #425743;"></i></td>
+                            <td><a href="{% url 'service_manage'  %}" style="color:#425743;text-decoration: none;">Service Management</a></td>
+                        </tr>
+                        <tr class="datarow" style="text-align: center;">
+                            <td><i class="fas fa-users" style="color: #425743;"></i></td>
+                            <td><a href="{% url 'category_manage' %}" style="color: #425743;text-decoration: none;">Category Management</a></td>
+                        </tr>
+                        <tr class="datarow" style="text-align: center;">
+                            <td><i class="fa-solid fa-passport" style="color: #425743;"></i></td>
+                            <td><a href="{% url 'portfolio_manage' %}" style="color: #425743;text-decoration: none;">Portfolio Management</a></td>
+                        </tr>
+                        <tr class="datarow" style="text-align: center;">
+                            <td><i class="fas fa-chart-bar" style="color: #425743;"></i></td>
+                            <td><a href="{% url 'blog_manage' %}" style="color:#425743;text-decoration: none;">Blog Management</a></td>
+                        </tr>
+                        <tr class="datarow" style="text-align: center;">
+                            <td><i class="fa-brands fa-bandcamp" style="color: #425743;"></i></td>
+                            <td><a href="{% url 'brand_manage' %}" style="color: #425743;text-decoration: none;">Brand Management</a></td>
+                        </tr>
+                        <tr class="datarow" style="text-align: center;">
+                            <td><i class="fa-regular fa-question" style="color: #425743;"></i></td>
+                            <td><a href="{% url 'faq_manage' %}" style="color: #425743;text-decoration: none;">FAQ Management</a></td>
+                        </tr>
+                        <tr class="datarow" style="text-align: center;">
+                            <td><i class="fas fa-lock" style="color: #425743;"></i></i></td>
+                            <td><a href="{% url 'change_password' %}" style="color: #425743;text-decoration: none;">Change Password</a></td>
+                        </tr>
+                        <tr class="datarow" style="text-align: center;">
+                            <td><i class="fas fa-cogs" style="color: #425743;"></i></td>
+                            <td>
+                                <a href="#" id="moreLink" style="color: #425743;text-decoration: none;">Static Content <i class="fas fa-caret-down"></i></a>
+                                <div id="dropdownContent" class="dropdown-content">
+                                    <a href="{% url 'termscondition' %}" style="color:#425743;text-decoration: none;">Terms and Condition Management</a>
+                                    <a href="{% url 'privacypolicy' %}" style="color:#425743;text-decoration: none;">Privacy and Policy Management</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-10">
+                  <div class="d4">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-md-4">
+                                <span id="sr_no" style="display: none;">{{id}}</span>
+                                  <div id="serviceImage" style="text-align: center;">
+
+                                      <!-- <img src="" alt="Blog Image"  class="img-fluid"> -->
+                                  </div>
+                              </div>
+                              <div class="col-md-8">
+                                  <!-- Display other service details here -->
+                                  <p class="view_details"><strong>Service Name : </strong><span id="serviceName"></span></p>
+                                  <p class="view_details"><strong>Service ID : </strong> <span id="serviceID"></span></p>
+                                  <p class="view_details"><strong>Created Date & Time : </strong><span id="createdDateTime"></span></p>
+                                  <!-- <button type="button" class="btn btn-primary" onclick="window.location.href='update.html'">Edit</button>
+
+                                  <button type="button" class="btn btn-danger" onclick="deleteDialog()">Delete</button> -->
+                                  <a href="javascript:history.back()" class="btn" style="background-color: #e6f7e3;color: #425743;">Go Back</a>
+                              </div>
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>           
+                </div>
+                
+            </div>
+            
+    <div class="overlay" id="overlay">
+        <div class="dialog-box" id="dialogBox">
+           
+            <p>Are you sure you want to delete the data?</p>
+            <button id="yesButton" >Yes</button>
+            <button id="noButton">No</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="confirmationOverlay">
+        <div class="dialog-box" id="confirmationDialog">
+            <i class="fas fa-check-circle"></i>
+            <p>Your data is successfully deleted.</p>
+        </div>
+    </div>
+
+   
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Initially open the sidebar
+    var sidebar = document.querySelector('.sidebar');
+    sidebar.classList.add('active');
+
+    // Toggle the sidebar on button click
+    document.getElementById('sidebarCollapse').addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+    });
+});
+    </script>
+    <script src="{% static 'js/admin_panel/service_script.js' %}"></script>
+</body>
+
+</html>

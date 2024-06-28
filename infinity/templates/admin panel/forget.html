@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Forget Password</title>
+    <link rel="stylesheet" href="{% static 'css/admin_panel/login_style.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm custom-navbar d2">       
+        <div class="container-fluid">
+             <img src="{% static 'images/infinity_logo.png' %}" alt="" class="logo" style="width: 5%;">
+            
+            <div class="flex-grow-1"></div>
+                      
+        </div>
+    </nav>
+        <div id="loader" class="loader"></div>
+        <div class="login-container">
+            <h2 class="title">FORGOT YOUR PASSWORD</h2>
+            <div style="text-align: center;">
+                <p class="title_para">Enter the email address associated with your account and we will give you opportunity to reset password.</p>
+        </div> 
+
+            <form method="post" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm(event)" novalidate id="emailForm"  >
+                {% csrf_token %}
+                <div class="login-input">
+                <input type="text" id="email" name="email"   placeholder="Enter Email ID" required ><br>
+              </div>
+              
+              <input value="Submit" type="submit" class="login-button" id="loginButton" >
+              <div  class="backtologin">
+                  <a href="{% url 'admin_login' %}">Back to Login</a>
+                </div>
+            </form>  
+            
+            <div class="overlay" id="overlay">
+                <div class="dialog-box" id="dialogBox">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Check your email for OTP</p>
+                </div>
+            </div>
+        </div>
+        
+
+</body>
+<style>
+    .loader {
+    display: none;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+</style>
+{% comment %} <script src="{% static 'js/admin_panel/email.js' %}"></script> {% endcomment %}
+<script src="{% static 'js/admin_panel/forget.js' %}"></script>
+
+</html>

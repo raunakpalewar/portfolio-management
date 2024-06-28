@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+{% extends './admin_base.html' %}
+{% load static %}
+
+
+{% block title %} Change password {% endblock %}
+{% block sidebar %}
+
+<div class="toggle">
+    <button id="sidebarCollapse"><i class="fa fa-bars"></i></button>
+</div>
+<div class="dashboard col-md-2 d3 table-outer d-md-block sidebar" style="padding-left: 0; padding-right: 0;">
+
+    <table class="table active" id="sidebar">
+        <tbody class="barrow">
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-gauge-high" style="color: #425743;"></i></td>
+                <td><a href="{% url 'admin_dashboard' %}" style="color: #425743;text-decoration: none;">Dashboard</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-screwdriver-wrench" style="color: #425743;"></i></td>
+                <td><a href="{% url 'service_manage'  %}" style="color:#425743;text-decoration: none;">Service Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-users" style="color: #425743;"></i></td>
+                <td><a href="{% url 'category_manage' %}" style="color: #425743;text-decoration: none;">Category Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-passport" style="color: #425743;"></i></td>
+                <td><a href="{% url 'portfolio_manage' %}" style="color: #425743;text-decoration: none;">Portfolio Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-chart-bar" style="color: #425743;"></i></td>
+                <td><a href="{% url 'blog_manage' %}" style="color:#425743;text-decoration: none;">Blog Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-brands fa-bandcamp" style="color: #425743;"></i></td>
+                <td><a href="{% url 'brand_manage' %}" style="color: #425743;text-decoration: none;">Brand Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-regular fa-question" style="color: #425743;"></i></td>
+                <td><a href="{% url 'faq_manage' %}" style="color: #425743;text-decoration: none;">FAQ Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-lock" style="color: #425743;"></i></i></td>
+                <td><a href="{% url 'change_password' %}" style="color: #425743;text-decoration: none;">Change Password</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-cogs" style="color: #425743;"></i></td>
+                <td>
+                    <a href="#" id="moreLink" style="color: #425743;text-decoration: none;">Static Content <i class="fas fa-caret-down"></i></a>
+                    <div id="dropdownContent" class="dropdown-content">
+                        <a href="{% url 'termscondition' %}" style="color:#425743;text-decoration: none;">Terms and Condition Management</a>
+                        <a href="{% url 'privacypolicy' %}" style="color:#425743;text-decoration: none;">Privacy and Policy Management</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block heading %}
+<h2>Change Password</h2>
+{% endblock %}
+
+{% block main_content %}   
+<div class="row ">
+    <div>
+    <span style="color:#425743">Please enter the current password and new password. Please do not use last 3 previously used password as the new password.</span>   <br><br>                 
+</div>
+</div>
+<div class="form-container">
+    <form  method="POST" enctype="multipart/form-data" onsubmit="return validatePasswordForm(event)" name="passwordChangeForm" novalidate>
+        {% csrf_token %}
+        <div>
+            <div>
+                <div style="position: relative; width: 300px; margin: 0 auto;">
+                    <input type="password" name="currentPassword" id="currentPasswordInput" style="width: 100%; height: 35px; padding-right: 25px; border-color: black; background-color: #e6f7e3;" class="form-control" placeholder="Enter current password" />
+                    <i class="fa fa-eye" id="togglePassword2" aria-hidden="true" onclick="togglePasswordVisibility('currentPasswordInput')" style="position: absolute; right: 8px; top: 10px; cursor: pointer;background-color: transparent;"></i>
+                    <span class="currentPasswordError" id="currentPasswordError" style="color: red;"></span>
+                </div>
+            </div>
+        </div><br>
+        <div>
+            <div>
+                <div style="position: relative; width: 300px; margin: 0 auto;">
+                    <input type="password" name="newPassword" id="newPasswordInput" style="width: 100%; height: 35px; padding-right: 25px; border-color: black; background-color: #e6f7e3;" class="form-control" onclick="togglePasswordVisibility('newPasswordInput')" placeholder="Enter new password" />
+                    <i class="fa fa-eye" id="togglePassword2" aria-hidden="true" onclick="togglePasswordVisibility('newPasswordInput')" style="position: absolute; right: 8px; top: 10px; cursor: pointer;background-color: transparent;"></i>
+                    
+                    <span class="newPasswordError" id="newPasswordError" style="color: red;"></span>
+                   
+                </div>
+            </div>
+        </div><br>
+        <div>
+            <div>
+                <div style="position: relative; width: 300px; margin: 0 auto;">
+                    <input type="password" name="confirmPassword" id="confirmPasswordInput" style="width: 100%; height: 35px; padding-right: 25px; border-color: black; background-color: #e6f7e3;" class="form-control" onclick="togglePasswordVisibility('confirmPasswordInput')" placeholder="Enter confirm password" />
+                    <i class="fa fa-eye" id="togglePassword2" aria-hidden="true" onclick="togglePasswordVisibility('confirmPasswordInput')" style="position: absolute; right: 8px; top: 10px; cursor: pointer;background-color: transparent;"></i>
+                    <span class="confirmPasswordError" id="confirmPasswordError" style="color: red;"></span>
+                </div>
+            </div>
+        </div><br>
+        <div class="text-center mb-3">
+            <button type="submit" class="btn" style="text-align:center;background-color: #B0D9B1;color: #425743;">Change Password</button>
+        </div>
+    </form>
+
+</div>
+<script src="{% static 'js/admin_panel/change_script.js' %}"></script>
+{% endblock %}   
+
+{% comment %} {% block script %}<script src="{% static 'js/admin_panel/change_script.js' %}"></script>{% endblock %} {% endcomment %}

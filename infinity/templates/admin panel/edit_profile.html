@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+{% extends './admin_base.html' %}
+{% load static %}
+
+
+{% block title %}Edit Profile {% endblock %}
+{% block sidebar %}
+
+<div class="toggle">
+    <button id="sidebarCollapse"><i class="fa fa-bars"></i></button>
+</div>
+<div class="dashboard col-md-2 d3 table-outer d-md-block sidebar" style="padding-left: 0; padding-right: 0;">
+
+    <table class="table active" id="sidebar">
+        <tbody class="barrow">
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-gauge-high" style="color: #425743;"></i></td>
+                <td><a href="{% url 'admin_dashboard' %}" style="color: #425743;text-decoration: none;">Dashboard</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-screwdriver-wrench" style="color: #425743;"></i></td>
+                <td><a href="{% url 'service_manage'  %}" style="color:#425743;text-decoration: none;">Service Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-users" style="color: #425743;"></i></td>
+                <td><a href="{% url 'category_manage' %}" style="color: #425743;text-decoration: none;">Category Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-solid fa-passport" style="color: #425743;"></i></td>
+                <td><a href="{% url 'portfolio_manage' %}" style="color: #425743;text-decoration: none;">Portfolio Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-chart-bar" style="color: #425743;"></i></td>
+                <td><a href="{% url 'blog_manage' %}" style="color:#425743;text-decoration: none;">Blog Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-brands fa-bandcamp" style="color: #425743;"></i></td>
+                <td><a href="{% url 'brand_manage' %}" style="color: #425743;text-decoration: none;">Brand Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fa-regular fa-question" style="color: #425743;"></i></td>
+                <td><a href="{% url 'faq_manage' %}" style="color: #425743;text-decoration: none;">FAQ Management</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-lock" style="color: #425743;"></i></td>
+                <td><a href="{% url 'change_password' %}" style="color: #425743;text-decoration: none;">Change Password</a></td>
+            </tr>
+            <tr class="datarow" style="text-align: center;">
+                <td><i class="fas fa-cogs" style="color: #425743;"></i></td>
+                <td>
+                    <a href="#" id="moreLink" style="color: #425743;text-decoration: none;">Static Content <i class="fas fa-caret-down"></i></a>
+                    <div id="dropdownContent" class="dropdown-content">
+                        <a href="{% url 'termscondition' %}" style="color:#425743;text-decoration: none;">Terms and Condition Management</a>
+                        <a href="{% url 'privacypolicy' %}" style="color:#425743;text-decoration: none;">Privacy and Policy Management</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block heading %}<h2>Edit Profile</h2>
+{% endblock %}
+
+                           
+{% block main_content %}
+<div class="d6">
+    <div class="col-md-8">
+        <!-- Display other service details here -->
+        <form action="" method="post" id="profileForm" name="editprofileform" enctype="multipart/form-data">
+            <div class="col-md-3" style="margin-bottom: 2%;">
+                <img src="" alt="Service Image" id="profile_image" class="img-fluid">
+            </div>
+            <div class="">
+                <div class="mb-3" style="display: flex;">
+                    <label for="serviceName" class="form-label">Edit Name:</label>
+                    <input type="text" class="form-control" id="serviceName" name="serviceName" style="width: 75%;" placeholder="Enter the name" required>
+                </div>
+                
+                <div class="mb-3" style="display: flex;">
+                    <label for="email" class="form-label">Edit Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" style="width: 75%; background-color: #e6f7e3;color: #425743;" placeholder="Enter the email" readonly>
+                </div>
+                
+                <div class="mb-4" style="display: flex;">
+                    <label for="image">Image:</label>
+                    <input type="file" name="image" id="image" style="color: #fff;">
+                </div>
+            </div>
+            <div style="text-align: center;margin-left: 50%;display: flex;">
+                <input type="submit" class="btn" id="saveButton" value="Save Profile" style="background-color: #B0D9B1;height: fit-content;color: #425743;">
+            </div>
+            </form>
+        </div>
+</div>
+<div id="successPopup" class="popup">
+    <div class="popup-content">
+        <i class="fas fa-check-circle"></i>
+        <p>Profile successfully updated!</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}<script src="{% static 'js/admin_panel/edit_profile.js' %}"></script>{% endblock %}
